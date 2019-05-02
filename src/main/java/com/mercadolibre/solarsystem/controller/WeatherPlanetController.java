@@ -1,6 +1,7 @@
 package com.mercadolibre.solarsystem.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,6 @@ import com.mercadolibre.solarsystem.endpoint.SolarSystemEndpoint;
 import com.mercadolibre.solarsystem.exception.ApiException;
 import com.mercadolibre.solarsystem.exception.WeatherFormatException;
 import com.mercadolibre.solarsystem.service.WeatherPlanetService;
-import com.mercadolibre.solarsystem.service.WeatherService;
 import com.mercadolibre.solarsystem.validator.WeatherPlanetValidator;
 
 @RestController
@@ -21,12 +21,9 @@ import com.mercadolibre.solarsystem.validator.WeatherPlanetValidator;
 public class WeatherPlanetController {
 	
 		@Autowired
-		WeatherPlanetService weatherPlanetService;
+		private WeatherPlanetService weatherPlanetService;
 		
-		@Autowired
-		WeatherService weatherService;
-
-		@GetMapping(value=SolarSystemEndpoint.GET_WEATHER)
+		@GetMapping(value=SolarSystemEndpoint.GET_WEATHER ,produces = MediaType.APPLICATION_JSON_VALUE)
 		public ResponseEntity<WeatherPlanetResponseDTO> getWeather(@PathVariable String planet, @RequestParam String day) throws ApiException{
 			
 			if(!WeatherPlanetValidator.validatePlanet(planet) && !WeatherPlanetValidator.validateDay(day)){

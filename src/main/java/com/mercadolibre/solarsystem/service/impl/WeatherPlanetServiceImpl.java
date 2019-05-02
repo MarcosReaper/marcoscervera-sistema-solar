@@ -18,14 +18,11 @@ import com.mercadolibre.solarsystem.utils.MathUtil;
 public class WeatherPlanetServiceImpl implements WeatherPlanetService{
 	
 	@Autowired
-	WeatherPlanetRepository WeatherPlanetRepository;
+	protected WeatherPlanetRepository WeatherPlanetRepository;
 	
 	@Autowired
-	PlanetService planetService;
+	protected PlanetService planetService;
 	
-	private Integer dayMaxRain;
-	private Double auxArea;
-
 	@Override
 	public WeatherPlanetResponseDTO getWeatherByDayAndPlanetName(Integer day, String planetName) {
 		
@@ -65,11 +62,11 @@ public class WeatherPlanetServiceImpl implements WeatherPlanetService{
 	public Integer resolveMaxRainDay() {
 		List<Planet> planetList = planetService.findAll();
 		List<WeatherPlanet> weatherPlanetList = findByWeatherId(WeatherEnum.RAINFALL.getId());
-		auxArea = 0D;
-		dayMaxRain = 0;
+		Double auxArea = 0D;
+		Integer dayMaxRain = 0;
 		if(planetList!=null && planetList.size()== 3) {
-			weatherPlanetList.stream().forEach(weatherPlanet ->{
-				
+			
+			for(WeatherPlanet weatherPlanet:weatherPlanetList) {
 				Double area = MathUtil.area(planetList.get(0).calculateXPosition(weatherPlanet.getDay()),
 						planetList.get(0).calculateYPosition(weatherPlanet.getDay()),
 						planetList.get(1).calculateXPosition(weatherPlanet.getDay()), 
@@ -82,7 +79,7 @@ public class WeatherPlanetServiceImpl implements WeatherPlanetService{
 				}
 				
 				auxArea = area;
-			});
+			}
 		}
 		return dayMaxRain;
 	}

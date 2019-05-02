@@ -15,7 +15,7 @@ import com.mercadolibre.solarsystem.service.PlanetService;
 public class PlanetServiceImpl implements PlanetService{
 	
 	@Autowired
-	PlanetRepository planetRepository;
+	protected PlanetRepository planetRepository;
 
 	@Override
 	public List<Planet> findAll() {

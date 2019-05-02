@@ -17,7 +17,7 @@ import com.mercadolibre.solarsystem.utils.MathUtil;
 public class WeatherServiceImpl implements WeatherService{
 	
 	@Autowired
-	WeatherRepository weatherRepository;
+	protected WeatherRepository weatherRepository;
 
 	@Override
 	public List<Weather> findAll() {

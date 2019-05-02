@@ -15,7 +15,7 @@ public class MathUtil {
 		return opposite.equals(oppositeDegrees);
 	}
 	
-	private static Integer subtractSurplusDegress(Integer degrees) {
+	private static int subtractSurplusDegress(Integer degrees) {
 		if(degrees > 360) {
 			return subtractSurplusDegress(degrees - 360);
 		}
