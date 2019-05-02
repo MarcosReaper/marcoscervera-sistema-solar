@@ -30,7 +30,7 @@ public class MathUtil {
 		}
 	}
 	
-	public static Boolean areDotsAlligned(Double x1,Double y1,Double x2,Double y2,Double x3,Double y3) {
+	public static boolean areDotsAlligned(Double x1,Double y1,Double x2,Double y2,Double x3,Double y3) {
 		
 		if (((x2-x1)*(y3-y2))-((y2-y1)*(x3-x2)) == new Double(0)){
 			return true;

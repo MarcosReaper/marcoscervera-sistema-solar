@@ -52,7 +52,7 @@ public class GenerateWeatherForecastBatch implements Tasklet{
 	public void init() {
 		
 		planets = planetService.findAll();
-		daysOfCalculate = 12000;
+		daysOfCalculate = 3600;
 		weatherPlanetList = new ArrayList<>();
 	}
 	
@@ -65,9 +65,6 @@ public class GenerateWeatherForecastBatch implements Tasklet{
 		planets.stream().forEach(planet->{
 			
 			if(weather!=null) {
-				LOGGER.info("- Planeta: " + planet.getName() + " dia: " + auxDay + " dia del anio: " 
-						+ planet.getDayOfTheYear(auxDay) + " anio: " + planet.getYear(auxDay) + " Id: " +
-						Long.valueOf(planet.getId().toString() + auxDay));
 				
 				WeatherPlanet weatherPlanet = new WeatherPlanet();
 				weatherPlanet.setDay(auxDay);
